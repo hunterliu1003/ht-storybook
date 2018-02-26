@@ -4,10 +4,10 @@
     @dragenter="toggleHovering()"
     @dragleave="toggleHovering()">
     <div v-if="!value">
-      <p class="text-center">選擇圖片<span class="rti rti-2x rti-upload-content"></span></p>
+      <p class="text-center">選擇圖片</p>
       <p>- 或 - 拖曳檔案至此</p>
     </div>
-    <img v-if="value" class="rt-image-reader-media" :src="value" alt="" ref="imageInput">
+    <img v-if="value" class="rt-image-reader-media" :src="value" ref="imageInput">
     <input
       v-if="!value"
       class="rt-image-reader-input"
@@ -119,7 +119,7 @@
 </script>
 
 <style lang="scss">
-@mixin ui-image-reader($width: "150px", $height: "150px", $namespace: "rt"){
+@mixin ui-image-reader($width: "150px", $height: "150px", $namespace: "ht"){
 
   .#{$namespace}-image-reader {
     display: flex;
@@ -172,4 +172,6 @@
     }
   }
 }
+
+@include ui-image-reader()
 </style>

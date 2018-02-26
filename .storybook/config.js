@@ -4,13 +4,14 @@ import Vue from 'vue';
 import Vuex from 'vuex'; // Vue plugins
 
 // Import your custom components.
-import Mybutton from '../stories/Button.vue';
+import 'vue-awesome/icons'
+import Icon from 'vue-awesome/components/Icon.vue'
 
 // Install Vue plugins.
 Vue.use(Vuex);
 
 // Register custom components.
-Vue.component('my-button', Mybutton);
+Vue.component('icon', Icon);
 
 function loadStories() {
   // You can require as many stories as you need.

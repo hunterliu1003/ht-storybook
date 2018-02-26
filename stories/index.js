@@ -2,9 +2,6 @@ import Vue from 'vue';
 
 import { storiesOf } from '@storybook/vue';
 
-import 'vue-awesome/icons'
-import Icon from 'vue-awesome/components/Icon.vue'
-
 import MyButton from './Button.vue';
 import MySteps from './Steps.vue';
 import ImageReader from './ImageReader.vue';
@@ -62,7 +59,6 @@ storiesOf('ImageReader', module)
 
 storiesOf('Icons', module)
   .add('Icon', () => ({
-    components: { Icon },
     template: `
       <div>
         <icon name="beer"></icon>

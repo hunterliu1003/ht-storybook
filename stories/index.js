@@ -1,5 +1,6 @@
 import Vue from 'vue';
 
+
 import { storiesOf } from '@storybook/vue';
 
 import MyButton from './Button.vue';
@@ -17,5 +18,16 @@ storiesOf('MyButton', module)
 storiesOf('Steps', module)
   .add('Steps', () => ({
     components: { MySteps },
-    template: '<my-steps :active="1"></my-steps>'
+    template: `
+      <my-steps :active="2">
+        <span slot="step">1</span>
+        <span slot="step">2</span>
+        <span slot="step">3</span>
+      </my-steps>
+    `,
+    data () {
+      return {
+        stepList: ['1', '2', '3']
+      }
+    }
   }))

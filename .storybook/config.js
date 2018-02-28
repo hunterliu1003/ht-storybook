@@ -1,21 +1,27 @@
 import { configure } from '@storybook/vue';
+import { setOptions } from '@storybook/addon-options';
 
 import Vue from 'vue';
-import Vuex from 'vuex'; // Vue plugins
+import Vuex from 'vuex';
 
-// Import your custom components.
 import 'vue-awesome/icons'
 import Icon from 'vue-awesome/components/Icon.vue'
 
-// Install Vue plugins.
 Vue.use(Vuex);
 
-// Register custom components.
+setOptions({
+  name: 'Hunter storybook',
+  url: 'https://github.com/hunterliu1003/ht-storybook',
+  addonPanelInRight: false,
+});
+
 Vue.component('icon', Icon);
 
+const req = require.context('../stories', true, /stories\.js$/);
+
 function loadStories() {
-  // You can require as many stories as you need.
-  require('../stories');
+  req.keys().forEach(filename => req(filename));
 }
+
 
 configure(loadStories, module);

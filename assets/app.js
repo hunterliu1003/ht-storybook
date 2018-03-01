@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuetify from 'vuetify'
+import colors from 'vuetify/es5/util/colors'
 import 'vuetify/dist/vuetify.css'
 import App from './App.vue'
 import Components from 'components/_index'
@@ -8,7 +9,17 @@ import { createStore } from 'store/index'
 import { createRouter } from 'router/index'
 import { sync } from 'vuex-router-sync'
 
-Vue.use(Vuetify)
+Vue.use(Vuetify, {
+  theme: {
+    primary: colors.red.darken2,
+    accent: colors.red.accent2,
+    secondary: colors.grey.lighten1,
+    info: colors.blue.lighten1,
+    warning: colors.amber.darken2,
+    error: colors.red.accent4,
+    success: colors.green.lighten2
+  }
+})
 
 Object.keys(Components).forEach(key => {
   Vue.component(key, Components[key])

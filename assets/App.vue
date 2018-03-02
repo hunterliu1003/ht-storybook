@@ -28,7 +28,9 @@
     </v-navigation-drawer>
 
     <main>
-
+      <div class="red--text body-2">
+        123
+      </div>
     </main>
   </v-app>
 </template>

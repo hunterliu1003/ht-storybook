@@ -18,6 +18,14 @@ Vue.use(Vuetify, {
     warning: colors.amber.darken2,
     error: colors.red.accent4,
     success: colors.green.lighten2
+  },
+  options: {
+    // minifyTheme: function () {
+    //   return process.env.NODE_ENV === 'production'
+    //     ? val.replace(/[\s|\r\n|\r|\n]/g, '')
+    //     : null
+    // },
+    // themeVariations: ['primary', 'secondary', 'success']
   }
 })
 

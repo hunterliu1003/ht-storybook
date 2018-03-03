@@ -25,13 +25,9 @@
 
 <script>
 export default {
-  data () {
-    return {
-      meetups: [
-        { imageUrl: 'https://media.timeout.com/images/103444978/630/472/image.jpg', id: '1', title: 'Meetup in New York'},
-        { imageUrl: 'https://www.telegraph.co.uk/content/dam/Travel/hotels/europe/france/paris/eiffel-tower-paris-p.jpg?imwidth=1160', id: 'adfa213d213213sdfads', title: 'Meetup in Paris'},
-        { imageUrl: 'https://www.telegraph.co.uk/content/dam/Travel/2018/February/Akihabara-overview.jpg?imwidth=1240', id: 'adfadsf23123dfads', title: 'Meetup in Tokyo'},
-      ]
+  computed: {
+    meetups () {
+      return this.$store.getters.featuredMeetups
     }
   },
   methods: {

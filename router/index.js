@@ -6,11 +6,12 @@ const meta = require('./meta.json')
 
 // Function to create routes
 // Is default lazy but can be changed
-function route (path, view) {
+function route (path, view, props) {
   return {
     path: path,
     meta: meta[path],
-    component: resolve => import(`pages/${view}.vue`).then(resolve)
+    component: resolve => import(`pages/${view}.vue`).then(resolve),
+    props: props
   }
 }
 
@@ -25,7 +26,7 @@ export function createRouter () {
         route('/', 'Home'),
         route('/meetups', 'Meetup/Meetups'),
         route('/meetup/new', 'Meetup/CreateMeetup'),
-        route('/meetups/:id', 'Meetup/Meetup'),
+        route('/meetups/:id', 'Meetup/Meetup', true),
         route('/profile', 'User/Profile'),
         route('/signin', 'User/Signin'),
         route('/signup', 'User/Signup'),

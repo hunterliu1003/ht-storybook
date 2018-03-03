@@ -1,29 +1,42 @@
-<template lang="pug">
+<template lang='pug'>
   v-app
-    v-toolbar(dark class="primary")
+    v-navigation-drawer(v-model='sideNav' app)
+      v-list
+        v-list-tile(
+          v-for='item in menuItems'
+          :key='item.title'
+          @click=''
+        )
+          v-list-tile-action
+            v-icon {{ item.icon }}
+          v-list-tile-content
+            | {{ item.title }}
+
+    v-toolbar.primary(dark app)
       v-toolbar-side-icon(
-        @click.native="sideNav = !sideNav"
-        class="hidden-sm-and-up"
+        @click.native='sideNav = !sideNav'
+        class='hidden-sm-and-up'
       )
       v-toolbar-title
         | DevMeetup
       v-spacer
-      v-toolbar-items(class="hidden-xs-only")
-        v-btn(flat)
-          v-icon(left) supervisor_account
-          | View MeetUps
+      v-toolbar-items.hidden-xs-only
+        v-btn(flat v-for='item in menuItems' :key='item.title')
+          v-icon(left) {{ item.icon }}
+          | {{ item.title }}
 
-    v-navigation-drawer(v-model="sideNav")
-      v-list
-        v-list-tile
-          v-list-tile-action
-            v-icon supervisor_account
-          v-list-tile-content
-            | View MeetUps
+    v-content
+      v-container(fluid)
+        router-view
 
-    main
-      div(class="red--text body-2")
-        | 123
+    v-footer.grey.darken-3(height='auto')
+      v-layout(row wrap justify-center)
+        v-btn(color='white' flat v-for='link in links' :key='link')
+          | {{ link }}
+        v-flex(xs12 py-3 text-xs-center white--text)
+          | ©2018 —
+          strong  Vuetify
+
 
 </template>
 
@@ -36,6 +49,14 @@
     data () {
       return {
         sideNav: false,
+        menuItems: [
+          { icon: 'supervisor_account', title: 'View MeetUps' },
+          { icon: 'room', title: 'Organize Meetup' },
+          { icon: 'person', title: 'Profile' },
+          { icon: 'face', title: 'Sign up' },
+          { icon: 'lock_open', title: 'Sign in' }
+        ],
+        links: ['Home', 'About Us', 'Team', 'Services', 'Blog', 'Contact Us']
       }
     }
   }

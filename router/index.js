@@ -10,7 +10,7 @@ function route (path, view) {
   return {
     path: path,
     meta: meta[path],
-    component: resolve => import(`pages/${view}View.vue`).then(resolve)
+    component: resolve => import(`pages/${view}.vue`).then(resolve)
   }
 }
 
@@ -22,8 +22,12 @@ export function createRouter () {
       mode: 'history',
       scrollBehavior: () => ({ y: 0 }),
       routes: [
-        route('/', 'Welcome'),
-        route('/inspire', 'Inspire'),
+        route('/', 'Home'),
+        route('/Meetups', 'Meetup/Meetups'),
+        route('/CreateMeetup', 'Meetup/CreateMeetup'),
+        route('/Profile', 'User/Profile'),
+        route('/Signin', 'User/Signin'),
+        route('/Signup', 'User/Signup'),
         // Global redirect for 404
         { path: '*', redirect: '/' }
       ]

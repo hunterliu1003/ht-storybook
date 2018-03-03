@@ -31,11 +31,25 @@ export function createStore () {
         registeredMeetups: ['1asdfadsdsaf'],
       }
     },
-
-    actions: {},
-
-    mutations: {},
-
+    mutations: {
+      createMeetup (state, payload) {
+        state.loadedMeetups.push(payload)
+      }
+    },
+    actions: {
+      createMeetup ({commit}, payload) {
+        const meetup = {
+          title: payload.title,
+          location: payload.loaction,
+          imageUrl: payload.imageUrl,
+          description: payload.description,
+          date: payload.date,
+          id: 'sdafsadf'
+        }
+        // Reach out to firebase and store it
+        commit('createMeetup', meetup)
+      }
+    },
     getters: {
       loadedMeetups (state) {
         return state.loadedMeetups.sort((meetupA, meetupB) => {

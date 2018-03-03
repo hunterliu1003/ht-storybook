@@ -10,7 +10,7 @@
             height="400px"
           )
           v-card-text
-            div.info--text {{ meetup.date }} - {{ meetup.location }}
+            div.info--text {{ meetup.date | date }} - {{ meetup.location }}
             div {{ meetup.description }}
           v-card-actions
             v-spacer

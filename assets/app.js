@@ -4,6 +4,7 @@ import colors from 'vuetify/es5/util/colors'
 import 'vuetify/dist/vuetify.css'
 import App from './App.vue'
 import Components from 'components/_index'
+import DateFilter from '../filters/date'
 
 import { createStore } from 'store/index'
 import { createRouter } from 'router/index'
@@ -28,6 +29,8 @@ Vue.use(Vuetify, {
     // themeVariations: ['primary', 'secondary', 'success']
   }
 })
+
+Vue.filter('date', DateFilter)
 
 Object.keys(Components).forEach(key => {
   Vue.component(key, Components[key])

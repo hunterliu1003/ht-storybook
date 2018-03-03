@@ -14,7 +14,8 @@
                 v-card-title(primary-title)
                   div
                     h5.white--text.headline {{ meetup.title }}
-                    div {{ meetup.date }}
+                    div {{ meetup.date | date}}
+                    div {{ meetup.description }}
                 v-card-actions
                   v-btn(flat :to="'/meetups/' + meetup.id")
                     v-icon(left light) arrow_forward

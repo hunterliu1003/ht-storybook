@@ -52,15 +52,12 @@
           v-layout(row)
             v-flex(xs12 sm6 offset-sm3)
               v-date-picker(v-model="date")
-              p {{ date }}
           v-layout(row)
             v-flex(xs12 sm6 offset-sm3)
               v-time-picker(v-model="time" format="24hr")
-              p {{ time }}
           v-layout
             v-flex(xs12 sm6 offset-sm3)
               v-btn.primary(:disabled="!formIsValid" type="submit") Create Meetup
-              p {{ submittableDateTime }}
 </template>
 
 <script>

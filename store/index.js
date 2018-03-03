@@ -11,19 +11,25 @@ export function createStore () {
           imageUrl: 'https://media.timeout.com/images/103444978/630/472/image.jpg',
           id: '1asdfads', 
           title: 'Meetup in New York',
-          date: '2017-07-17'
+          date: '2017-07-17',
+          location: 'New York',
+          description: 'It is New York'
         },
         { 
           imageUrl: 'https://www.telegraph.co.uk/content/dam/Travel/hotels/europe/france/paris/eiffel-tower-paris-p.jpg?imwidth=1160',
           id: 'adfa213d213213sdfads', 
           title: 'Meetup in Paris',
-          date: '2017-07-27'
+          date: '2017-07-27',
+          location: 'Paris',
+          description: 'It is Paris'
         },
         { 
           imageUrl: 'https://www.telegraph.co.uk/content/dam/Travel/2018/February/Akihabara-overview.jpg?imwidth=1240', 
           id: 'adfads3dfads', 
           title: 'Meetup in Tokyo',
-          date: '2017-08-17'
+          date: '2017-08-17',
+          location: 'Tokyo',
+          description: 'It is Tokyo'
         },
       ],
       user: {

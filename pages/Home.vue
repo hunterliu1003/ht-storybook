@@ -2,9 +2,9 @@
   v-container
     v-layout(row wrap)
       v-flex.text-xs-center.text-sm-right(xs12 sm6)
-        v-btn.info(large router to='/meetups') Explore Meetups
+        v-btn.info(large to='/meetups') Explore Meetups
       v-flex.text-xs-center.text-sm-left(xs12 sm6)
-        v-btn.info(large router to='/meetups/new') Organize Meetup
+        v-btn.info(large to='/meetups/new') Organize Meetup
 
     v-layout.mt-2(row wrap)
       v-flex(xs12)

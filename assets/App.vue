@@ -1,11 +1,12 @@
 <template lang='pug'>
   v-app
-    v-navigation-drawer(v-model='sideNav' app)
+    v-navigation-drawer(temporary v-model='sideNav' app)
       v-list
         v-list-tile(
           v-for='item in menuItems'
           :key='item.title'
-          @click=''
+          router
+          :to='item.link'
         )
           v-list-tile-action
             v-icon {{ item.icon }}
@@ -18,10 +19,16 @@
         class='hidden-sm-and-up'
       )
       v-toolbar-title
-        | DevMeetup
+        router-link(to="/" tag="span" style="cursor: pointer") DevMeetup
       v-spacer
       v-toolbar-items.hidden-xs-only
-        v-btn(flat v-for='item in menuItems' :key='item.title')
+        v-btn(
+          flat 
+          v-for='item in menuItems' 
+          :key='item.title'
+          router
+          :to='item.link'
+        )
           v-icon(left) {{ item.icon }}
           | {{ item.title }}
 
@@ -50,11 +57,11 @@
       return {
         sideNav: false,
         menuItems: [
-          { icon: 'supervisor_account', title: 'View MeetUps' },
-          { icon: 'room', title: 'Organize Meetup' },
-          { icon: 'person', title: 'Profile' },
-          { icon: 'face', title: 'Sign up' },
-          { icon: 'lock_open', title: 'Sign in' }
+          { icon: 'supervisor_account', title: 'View MeetUps', link: '/meetups' },
+          { icon: 'room', title: 'Organize Meetup', link: '/meetup/new' },
+          { icon: 'person', title: 'Profile', link: '/profile' },
+          { icon: 'face', title: 'Sign up', link: '/signup' },
+          { icon: 'lock_open', title: 'Sign in', link: '/signin' }
         ],
         links: ['Home', 'About Us', 'Team', 'Services', 'Blog', 'Contact Us']
       }

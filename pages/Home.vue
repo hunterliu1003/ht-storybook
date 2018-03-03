@@ -8,11 +8,12 @@
 
     v-layout.mt-2(row wrap)
       v-flex(xs12)
-        v-carousel
+        v-carousel(style="cursor: pointer;")
           v-carousel-item(
             v-for='(meetup, i) in meetups'
             :src='meetup.imageUrl'
             :key='meetup.id'
+            @click.native='onLoadMeetup(meetup.id)'
           )
             div.title {{ meetup.title }}
 
@@ -27,10 +28,16 @@ export default {
   data () {
     return {
       meetups: [
-        { imageUrl: 'https://media.timeout.com/images/103444978/630/472/image.jpg', id: 'adfadsfdasfasdfads', title: 'Meetup in New York'},
+        { imageUrl: 'https://media.timeout.com/images/103444978/630/472/image.jpg', id: '1', title: 'Meetup in New York'},
         { imageUrl: 'https://www.telegraph.co.uk/content/dam/Travel/hotels/europe/france/paris/eiffel-tower-paris-p.jpg?imwidth=1160', id: 'adfa213d213213sdfads', title: 'Meetup in Paris'},
         { imageUrl: 'https://www.telegraph.co.uk/content/dam/Travel/2018/February/Akihabara-overview.jpg?imwidth=1240', id: 'adfadsf23123dfads', title: 'Meetup in Tokyo'},
       ]
+    }
+  },
+  methods: {
+    onLoadMeetup (id) {
+      this.$router.push('/meetups/' + id)
+      console.log('asdf')
     }
   }
 }

@@ -23,11 +23,12 @@ export function createRouter () {
       scrollBehavior: () => ({ y: 0 }),
       routes: [
         route('/', 'Home'),
-        route('/Meetups', 'Meetup/Meetups'),
-        route('/CreateMeetup', 'Meetup/CreateMeetup'),
-        route('/Profile', 'User/Profile'),
-        route('/Signin', 'User/Signin'),
-        route('/Signup', 'User/Signup'),
+        route('/meetups', 'Meetup/Meetups'),
+        route('/meetup/new', 'Meetup/CreateMeetup'),
+        route('/meetups/:id', 'Meetup/Meetup'),
+        route('/profile', 'User/Profile'),
+        route('/signin', 'User/Signin'),
+        route('/signup', 'User/Signup'),
         // Global redirect for 404
         { path: '*', redirect: '/' }
       ]

@@ -1,5 +1,8 @@
 <template lang="pug">
   v-container
+    v-layout(row v-if="error")
+      v-flex(xs12 sm6 offset-sm3)
+        app-alert(@dismissed="onDismissed" :text="error.message")
     v-layout(row)
       v-flex(xs12 sm6 offset-sm3)
         v-card
@@ -28,7 +31,9 @@
                     )
                 v-layout(row)
                   v-flex(xs12)
-                    v-btn(type="submit") Sign in
+                    v-btn(type="submit" :disabled="loading" :loading="loading") Sign in
+                      span.custom-loader(slot="loader")
+                        v-icon(light) cached
 </template>
 
 <script>
@@ -42,6 +47,12 @@
     computed: {
       user () {
         return this.$store.getters.user
+      },
+      error () {
+        return this.$store.getters.error
+      },
+      loading () {
+        return this.$store.getters.loading
       }
     },
     watch: {
@@ -57,6 +68,9 @@
           email: this.email,
           password: this.password
         })
+      },
+      onDismissed () {
+        this.$store.dispatch('clearError')
       }
     }
   }

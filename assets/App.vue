@@ -11,6 +11,13 @@
             v-icon {{ item.icon }}
           v-list-tile-content
             | {{ item.title }}
+        v-list-tile(
+          v-if="userIsAuthenticated"
+          @click="onLogout"
+        )
+          v-list-tile-action
+            v-icon exit_to_app
+          v-list-tile-content Logout
 
     v-toolbar.primary(dark app)
       v-toolbar-side-icon(
@@ -18,7 +25,11 @@
         class='hidden-sm-and-up'
       )
       v-toolbar-title
-        router-link(to="/" tag="span" style="cursor: pointer") DevMeetup
+        router-link(
+          to="/" 
+          tag="span" 
+          style="cursor: pointer"
+        ) DevMeetup
       v-spacer
       v-toolbar-items.hidden-xs-only
         v-btn(
@@ -29,7 +40,13 @@
         )
           v-icon(left) {{ item.icon }}
           | {{ item.title }}
-
+        v-btn(
+          flat 
+          v-if="userIsAuthenticated" 
+          @click="onLogout"
+        )
+          v-icon(left) exit_to_app
+          | Logout
     v-content
       v-container(fluid)
         router-view
@@ -75,7 +92,11 @@
       userIsAuthenticated () {
         return this.$store.getters.user !== null && this.$store.getters.user !== undefined
       }
+    },
+    methods: {
+      onLogout () {
+        this.$store.dispatch('logout')
+      }
     }
-
   }
 </script>

@@ -57,13 +57,15 @@ export function createApp (ssrContext) {
     ssrContext,
     render: h => h(App),
     created () {
-      firebase.initializeApp({
-        apiKey: 'AIzaSyBrMrSeFfaeRfPXVXlPhR11J2b1zZxhhPc',
-        authDomain: 'ht-storybook.firebaseapp.com',
-        databaseURL: 'https://ht-storybook.firebaseio.com',
-        projectId: 'ht-storybook',
-        storageBucket: 'ht-storybook.appspot.com'
-      })
+      if (!firebase.apps.length) {
+        firebase.initializeApp({
+          apiKey: 'AIzaSyBrMrSeFfaeRfPXVXlPhR11J2b1zZxhhPc',
+          authDomain: 'ht-storybook.firebaseapp.com',
+          databaseURL: 'https://ht-storybook.firebaseio.com',
+          projectId: 'ht-storybook',
+          storageBucket: 'ht-storybook.appspot.com'
+        });
+      }
     }
   })
 

@@ -1,7 +1,8 @@
-import { store } from '../store'
+import { createStore } from '../store'
+
+const store = createStore()
 
 export default (to, from, next) => {
-  console.log(store.getters)
   if (store.getters.user) {
     next()
   } else {

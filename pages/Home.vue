@@ -45,7 +45,6 @@ export default {
   methods: {
     onLoadMeetup (id) {
       this.$router.push('/meetups/' + id)
-      console.log('asdf')
     }
   }
 }

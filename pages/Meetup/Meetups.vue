@@ -20,7 +20,6 @@
                   v-btn(flat :to="'/meetups/' + meetup.id")
                     v-icon(left light) arrow_forward
                     | View Meetup
-
 </template>
 
 <script>

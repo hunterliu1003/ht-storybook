@@ -67,6 +67,7 @@ export function createApp (ssrContext) {
           storageBucket: 'ht-storybook.appspot.com'
         });
       }
+      this.$store.dispatch('loadMeetups')
     }
   })
 

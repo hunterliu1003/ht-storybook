@@ -4,9 +4,18 @@
       v-flex.text-xs-center.text-sm-right(xs12 sm6)
         v-btn.info(large to='/meetups') Explore Meetups
       v-flex.text-xs-center.text-sm-left(xs12 sm6)
-        v-btn.info(large to='/meetups/new') Organize Meetup
+        v-btn.info(large to='/meetup/new') Organize Meetup
 
-    v-layout.mt-2(row wrap)
+    v-layout
+      v-flex.text-xs-center(xs12)
+        v-progress-circular.primary--text(
+          indeterminate
+          :width="7"
+          :size="70"
+          v-if="loading"
+        )
+
+    v-layout.mt-2(row wrap v-if="!loading")
       v-flex(xs12)
         v-carousel(style="cursor: pointer;")
           v-carousel-item(
@@ -28,6 +37,9 @@ export default {
   computed: {
     meetups () {
       return this.$store.getters.featuredMeetups
+    },
+    loading () {
+      return this.$store.getters.loading
     }
   },
   methods: {

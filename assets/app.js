@@ -8,8 +8,8 @@ import * as firebase from 'firebase'
 import Components from 'components/_index'
 import DateFilter from '../filters/date'
 
-import { createStore } from 'store/index'
-import { createRouter } from 'router/index'
+import { store } from 'store/index'
+import { router } from 'router/index'
 import { sync } from 'vuex-router-sync'
 
 Vue.use(Vuetify, {
@@ -42,8 +42,7 @@ Object.keys(Components).forEach(key => {
 // app instances on each call (which is called for each SSR request)
 export function createApp (ssrContext) {
   // create store and router instances
-  const store = createStore()
-  const router = createRouter()
+  // const store = createStore()
 
   // sync the router with the vuex store.
   // this registers `store.state.route`
@@ -67,6 +66,11 @@ export function createApp (ssrContext) {
           storageBucket: 'ht-storybook.appspot.com'
         });
       }
+      firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+          this.$store.dispatch('autoSignIn', user)
+        }
+      })
       this.$store.dispatch('loadMeetups')
     }
   })

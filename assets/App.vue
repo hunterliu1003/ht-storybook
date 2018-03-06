@@ -90,6 +90,8 @@
         return menuItems
       },
       userIsAuthenticated () {
+        // console.log('user')
+        // console.log(this.$store.getters.user)
         return this.$store.getters.user !== null && this.$store.getters.user !== undefined
       }
     },
@@ -97,6 +99,10 @@
       onLogout () {
         this.$store.dispatch('logout')
       }
+    },
+    mounted () {
+      console.log(this.$store.getters)
+      console.log(this.$store.getters['user'])
     }
   }
 </script>

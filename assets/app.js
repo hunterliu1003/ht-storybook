@@ -4,13 +4,23 @@ import colors from 'vuetify/es5/util/colors'
 import 'vuetify/dist/vuetify.css'
 import '../stylus/main.styl'
 import App from './App.vue'
-import * as firebase from 'firebase'
+import firebase from 'firebase'
 import Components from 'components/_index'
 import DateFilter from '../filters/date'
 
-import { createStore } from 'store/index'
+import { store } from 'store/index'
 import { createRouter } from 'router/index'
 import { sync } from 'vuex-router-sync'
+
+if (!firebase.apps.length) {
+  firebase.initializeApp({
+    apiKey: 'AIzaSyBrMrSeFfaeRfPXVXlPhR11J2b1zZxhhPc',
+    authDomain: 'ht-storybook.firebaseapp.com',
+    databaseURL: 'https://ht-storybook.firebaseio.com',
+    projectId: 'ht-storybook',
+    storageBucket: 'gs://ht-storybook.appspot.com'
+  });
+}
 
 Vue.use(Vuetify, {
   theme: {
@@ -42,7 +52,7 @@ Object.keys(Components).forEach(key => {
 // app instances on each call (which is called for each SSR request)
 export function createApp (ssrContext) {
   // create store and router instances
-  const store = createStore()
+  // const store = createStore()
   const router = createRouter()
   // sync the router with the vuex store.
   // this registers `store.state.route`
@@ -56,16 +66,16 @@ export function createApp (ssrContext) {
     store,
     ssrContext,
     render: h => h(App),
-    created () {
-      if (!firebase.apps.length) {
-        firebase.initializeApp({
-          apiKey: 'AIzaSyBrMrSeFfaeRfPXVXlPhR11J2b1zZxhhPc',
-          authDomain: 'ht-storybook.firebaseapp.com',
-          databaseURL: 'https://ht-storybook.firebaseio.com',
-          projectId: 'ht-storybook',
-          storageBucket: 'gs://ht-storybook.appspot.com'
-        });
-      }
+    beforeCreate () {
+      // if (!firebase.apps.length) {
+      //   firebase.initializeApp({
+      //     apiKey: 'AIzaSyBrMrSeFfaeRfPXVXlPhR11J2b1zZxhhPc',
+      //     authDomain: 'ht-storybook.firebaseapp.com',
+      //     databaseURL: 'https://ht-storybook.firebaseio.com',
+      //     projectId: 'ht-storybook',
+      //     storageBucket: 'gs://ht-storybook.appspot.com'
+      //   });
+      // }
       firebase.auth().onAuthStateChanged(user => {
         if (user) {
           this.$store.dispatch('autoSignIn', user)

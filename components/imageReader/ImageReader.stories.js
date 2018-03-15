@@ -2,15 +2,15 @@ import Vue from 'vue';
 
 import { storiesOf } from '@storybook/vue';
 import { action } from '@storybook/addon-actions';
-import { withNotes } from '@storybook/addon-notes';
 import centered from '@storybook/addon-centered';
 import { withReadme, withDocs }  from 'storybook-readme';
 import README from './README.md';
 
-import MyButton from './Button.vue';
+import MyButton from './ImageReader.vue';
 storiesOf('MyButton', module)
   .addDecorator(centered)
   .add('story as a template', withDocs(README, () => ({
+    components: { MyButton },
     template: `
       <div>
         <my-button @click.native="clickHandler"></my-button>

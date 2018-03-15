@@ -1,11 +1,11 @@
 <template lang="pug">
-  .{{ dashCase name }}
-    | {{ dashCase name }}
+  .pagination
+    | pagination
 </template>
 
 <script>
 export default {
-  name: '{{ name }}',
+  name: 'pagination',
   components: {
   },
   props: {},
@@ -27,6 +27,6 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-  .{{ dashCase name }}
+  .pagination
     // display: none
 </style>

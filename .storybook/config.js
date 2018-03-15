@@ -8,10 +8,10 @@ Vue.use(Vuex);
 require('!!style-loader!css-loader!stylus-loader!../stylus/main.styl');
 
 setOptions({
-    name: 'ht-storybook',
-    url: 'https://github.com/hunterliu1003/ht-storybook',
-    addonPanelInRight: true
-  })
+  name: 'ht-storybook',
+  url: 'https://github.com/hunterliu1003/ht-storybook',
+  addonPanelInRight: true
+})
 
 const req = require.context('../components', true, /stories\.js$/);
 

@@ -1,19 +1,8 @@
-# Vuetify Webpack SSR Template
+# ht-storybook
 
-> Vuetify SSR Webpack Template
-
-## Build Setup
+## 使用
 
 ``` bash
-vue init vuetifyjs/webpack-ssr
-
-cd webpack-ssr
-
-# npm
 npm install
 
-# yarn
-yarn
-```
-
-For additional information, please visit the [Official Documentation](https://vuetifyjs.com).
+npm run storybook

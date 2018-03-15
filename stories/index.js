@@ -3,9 +3,11 @@ import Vue from 'vue';
 import { storiesOf } from '@storybook/vue';
 import { action } from '@storybook/addon-actions';
 import { withNotes } from '@storybook/addon-notes';
+import centered from '@storybook/addon-centered';
 
 import MyButton from './Button.vue';
 storiesOf('MyButton', module)
+  .addDecorator(centered)
   .add('story as a template', withNotes('myButton with Notes!')(() => ({
     template: `
       <div>

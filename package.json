@@ -4,6 +4,7 @@
   "description": "my vue components",
   "scripts": {
     "storybook": "start-storybook -p 9000 -c .storybook",
+    "build:storybook": "build-storybook -c .storybook -o .out",
     "plop": "plop --plopfile ./plop/index.js"
   },
   "repository": {

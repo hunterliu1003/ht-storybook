@@ -5,6 +5,8 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex);
 
+require('!!style-loader!css-loader!stylus-loader!../stylus/main.styl');
+
 setOptions({
     name: 'ht-storybook',
     url: 'https://github.com/hunterliu1003/ht-storybook',

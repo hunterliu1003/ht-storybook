@@ -6,7 +6,7 @@ import centered from '@storybook/addon-centered';
 import { withReadme, withDocs }  from 'storybook-readme';
 import README from './README.md';
 
-import MyButton from './ImageReader.vue';
+import MyButton from './MyButton.vue';
 storiesOf('MyButton', module)
   .addDecorator(centered)
   .add('story as a template', withDocs(README, () => ({

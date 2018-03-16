@@ -35,5 +35,11 @@ module.exports = {
       templateFile: 'component/stories.hbs',
       abortOnFail: true,
     },
+    {
+      type: 'add',
+      path: `${componentPath}/{{properCase name}}/README.md`,
+      templateFile: 'component/readme.hbs',
+      abortOnFail: true,
+    },
   ],
 };

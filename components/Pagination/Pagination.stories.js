@@ -18,7 +18,7 @@ storiesOf('Pagination', module)
     },
     template:`
       <div>
-        <Pagination />
+        <Pagination :page="1" :perPage="3" :total="100" :isLock="false"/>
       </div>
     `
   }));

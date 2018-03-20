@@ -18,7 +18,11 @@ storiesOf('Steps', module)
     },
     template:`
       <div>
-        <Steps />
+        <Steps :active="step">
+          <span slot="step">選擇商品</span>
+          <span slot="step">設定素材</span>
+          <span slot="step">預覽廣告</span>
+        </Steps>
       </div>
     `
   }));

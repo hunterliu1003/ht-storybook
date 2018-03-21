@@ -76,23 +76,52 @@ export default {
     `)
     document.getElementsByTagName('body')[0].appendChild(input);
 
-    
-    let drop;
-    drop = this.$refs[this.id]
-    drop.addEventListener('drop', function(event) {
-      event.preventDefault();
-      let files = event.dataTransfer.files;
+    let drop = this.$refs[this.id]
+    function cancel(e) {
+      if (e.preventDefault) {
+        e.preventDefault();
+      }
+    }
+    // Tells the browser that we *can* drop on this target
+    drop.addEventListener('dragover', cancel, false);
+    drop.addEventListener('dragenter', cancel, false);
+
+    drop.addEventListener('drop', function(e) {
+      e = e || window.event; // get window.event if e argument missing (in IE)   
+      if (e.preventDefault) { e.preventDefault(); } // stops the browser from redirecting off to the image.
+
+      let files = e.dataTransfer.files;
       for (let i = 0; i < files.length; i++) {
         let file = files[i];
         let reader = new FileReader();
-        console.log(file)
+        //attach event handlers here...
         reader.readAsDataURL(file);
-        reader.addEventListener('loadend', function(e) {
-          console.log(this)
-          console.log(e)
+        reader.addEventListener('loadend', function(e, file) {
+          let bin = this.result;
+          let img = document.createElement("img");
+          img.file = file;
+          img.src = bin;
+          drop.appendChild(img);
         }, false);
       }
     }, false);
+
+    // let drop;
+    // drop = this.$refs[this.id]
+    // drop.addEventListener('drop', function(event) {
+    //   event.preventDefault();
+    //   let files = event.dataTransfer.files;
+    //   for (let i = 0; i < files.length; i++) {
+    //     let file = files[i];
+    //     let reader = new FileReader();
+    //     console.log(file)
+    //     reader.readAsDataURL(file);
+    //     reader.addEventListener('loadend', function(e) {
+    //       console.log(this)
+    //       console.log(e)
+    //     }, false);
+    //   }
+    // }, false);
   },
   methods: {
     onInput (event) {
@@ -128,4 +157,11 @@ export default {
     opacity: 0;
     z-index: 1;
   }*/
+  #drop {
+    min-height: 150px;
+    width: 250px;
+    border: 1px solid blue;
+    margin: 10px;
+    padding: 10px;
+  }
 </style>

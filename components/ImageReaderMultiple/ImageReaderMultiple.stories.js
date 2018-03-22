@@ -11,6 +11,18 @@ Vue.component('ImageReaderMultiple', ImageReaderMultiple);
 storiesOf('ImageReaderMultiple', module)
   // .addDecorator(centered)
   .add('ImageReaderMultiple', () => ({
+    data () {
+      return {
+        images: [],
+        images2: []
+      }
+    },
+    watch: {
+      images () {
+        console.log('images')
+        console.log(this.images)
+      }
+    },
     methods: {
       log() {
         action('ImageReaderMultiple')();
@@ -18,9 +30,24 @@ storiesOf('ImageReaderMultiple', module)
     },
     template:`
       <div>
+        <div>
+          imageReaderA
+        </div>
         <ImageReaderMultiple
           id="imageReaderA"
           multiple
+          v-model="images"
+        >
+        </ImageReaderMultiple>
+        <div>
+          imageReaderB
+        </div>
+        <ImageReaderMultiple
+          id="imageReaderB"
+          width="500px"
+          min-height="500px"
+          multiple
+          v-model="images2"
         >
         </ImageReaderMultiple>
       </div>

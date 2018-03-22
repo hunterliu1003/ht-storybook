@@ -1,7 +1,7 @@
 <template>
   <div
     :id="id"
-    :style="{ width, 'min-height': height }"
+    :style="{ width, 'min-height': minHeight }"
     class="image-reader"
     @click="onInput"
     :ref="id"
@@ -9,15 +9,17 @@
     <slot
       name="default"
       v-if="isShow"
-      class="image-reader-default"
     >
       Drop files here to upload
     </slot>
 
-    <div v-for="(image, index) in images" @click.stop>
-      <!-- <p>{{ image }}</p> -->
+    <div
+      v-for="(image, index) in value"
+      class="imgae-reader-image"
+      @click.stop
+    >
       <img :src="image.url" alt="">
-      <p @click.stop="deleteImage(index)">delete</p>
+      <span @click.stop="deleteImage(index)">X</span>
     </div>
   </div>
 </template>
@@ -25,12 +27,16 @@
 <script>
 export default {
   name: 'ImageReaderMultiple',
-  components: {
-  },
   props: {
     id: {
       type: String,
       required: true
+    },
+    value: {
+      type: Array,
+      default () {
+        return []
+      }
     },
     width: {
       type: String,
@@ -38,7 +44,7 @@ export default {
         return '100%'
       }
     },
-    height: {
+    minHeight: {
       type: String,
       default () {
         return '200px'
@@ -53,13 +59,12 @@ export default {
   },
   data () {
     return {
-      images: [],
       inputId: this.id + 'Input'
     }
   },
   computed: {
     isShow () {
-      return !(this.images.length > 0)
+      return !(this.value.length > 0)
     }
   },
   created () {
@@ -95,6 +100,7 @@ export default {
       $body.appendChild($input);
       $input.addEventListener('change', event => {
         this.pushFilesToImages(event.target.files)
+        this.resetElementInput()
       }, false)
     },
     resetElementInput () {
@@ -108,7 +114,6 @@ export default {
       let drop = this.$refs[this.id]
       drop.addEventListener('dragover', this.cancel, false)
       drop.addEventListener('dragenter', this.cancel, false)
-
       drop.addEventListener('drop', e => {
         e = e || window.event; // get window.event if e argument missing (in IE)
         this.cancel(e)
@@ -121,8 +126,8 @@ export default {
         let reader = new FileReader()
         reader.readAsDataURL(file)
         reader.addEventListener('loadend', e => {
-          console.log(e.target.result)
-          this.images.push({
+          // console.log(e.target.result)
+          this.value.push({
             file: file,
             url: e.target.result
           })
@@ -132,9 +137,7 @@ export default {
     },
     deleteImage (index) {
       this.resetElementInput()
-      console.log(index)
-      console.log(this.images)
-      this.images.splice(index, 1)
+      this.value.splice(index, 1)
     }
   }
 }
@@ -145,11 +148,33 @@ export default {
     position: relative;
     border: 2px dashed #CBCBCB;
     display: flex;
+    align-items: flex-start;
+    cursor: pointer;
+    flex-wrap: wrap;
+  }
+  .imgae-reader-image {
+    border: 3px solid #000;
+    margin: 15px;
+    position: relative;
+    display: flex;
     align-items: center;
     justify-content: center;
-    cursor: pointer;
   }
-  .image-reader-default {
-
+  .imgae-reader-image img {
+    display: block;
+    max-height: 200px;
+    min-width: 100px;
+    object-fit: cover;
+  }
+  .imgae-reader-image span {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    background-color: gray;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
   }
 </style>

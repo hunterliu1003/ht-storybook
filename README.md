@@ -6,9 +6,10 @@
 npm install
 
 npm run storybook
+# localhost:9000
 
-## Addons
-- addon-actions
-- addon-notes
-- addon-options
-- addon-centered
+npm run build:storybook
+
+npm run plop
+# create new component
+```

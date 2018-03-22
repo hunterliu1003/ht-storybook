@@ -11,7 +11,7 @@
       name="default"
       v-if="isShow"
     >
-      Drop files here to upload
+      <span>Drop files here to upload</span>
     </slot>
 
     <div

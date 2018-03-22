@@ -1,7 +1,7 @@
 <template>
   <div
     :id="id"
-    :style="{ width, height }"
+    :style="{ width, 'min-height': height }"
     class="image-reader"
     @click="onInput"
     :ref="id"
@@ -13,9 +13,11 @@
     >
       Drop files here to upload
     </slot>
-    
-    <div v-for="image in images">
-      <p>{{ image }}</p>
+
+    <div v-for="(image, index) in images" @click.stop>
+      <!-- <p>{{ image }}</p> -->
+      <img :src="image.url" alt="">
+      <p @click.stop="deleteImage(index)">delete</p>
     </div>
   </div>
 </template>
@@ -51,83 +53,88 @@ export default {
   },
   data () {
     return {
-      images: [1, 2, 3, 4],
-      isShow: false,
+      images: [],
       inputId: this.id + 'Input'
     }
   },
   computed: {
+    isShow () {
+      return !(this.images.length > 0)
+    }
   },
   created () {
   },
   mounted () {
-    let input = document.createElement('input')
-    input.setAttribute('type', 'file')
-    input.setAttribute('accept', 'image/*')
-    input.setAttribute('multiple', this.multiple)
-    input.setAttribute('id', this.inputId)
-    input.setAttribute('style', `
-      visibility: hidden; 
-      position: absolute; 
-      top: 0px; 
-      left: 0px; 
-      height: 0px; 
-      width: 0px;
-    `)
-    document.getElementsByTagName('body')[0].appendChild(input);
-
-    let drop = this.$refs[this.id]
-    function cancel(e) {
-      if (e.preventDefault) {
-        e.preventDefault();
-      }
-    }
-    // Tells the browser that we *can* drop on this target
-    drop.addEventListener('dragover', cancel, false);
-    drop.addEventListener('dragenter', cancel, false);
-
-    drop.addEventListener('drop', function(e) {
-      e = e || window.event; // get window.event if e argument missing (in IE)   
-      if (e.preventDefault) { e.preventDefault(); } // stops the browser from redirecting off to the image.
-
-      let files = e.dataTransfer.files;
-      for (let i = 0; i < files.length; i++) {
-        let file = files[i];
-        let reader = new FileReader();
-        //attach event handlers here...
-        reader.readAsDataURL(file);
-        reader.addEventListener('loadend', function(e, file) {
-          let bin = this.result;
-          let img = document.createElement("img");
-          img.file = file;
-          img.src = bin;
-          drop.appendChild(img);
-        }, false);
-      }
-    }, false);
-
-    // let drop;
-    // drop = this.$refs[this.id]
-    // drop.addEventListener('drop', function(event) {
-    //   event.preventDefault();
-    //   let files = event.dataTransfer.files;
-    //   for (let i = 0; i < files.length; i++) {
-    //     let file = files[i];
-    //     let reader = new FileReader();
-    //     console.log(file)
-    //     reader.readAsDataURL(file);
-    //     reader.addEventListener('loadend', function(e) {
-    //       console.log(this)
-    //       console.log(e)
-    //     }, false);
-    //   }
-    // }, false);
+    this.setElementInput()
+    this.eventListenerDrop()
   },
   methods: {
     onInput (event) {
-      // console.log('onInput!')
-      // console.log(event)
       document.getElementById(this.inputId).click()
+    },
+    cancel (event) {
+      if (event.preventDefault) {
+        event.preventDefault()
+      }
+    },
+    setElementInput () {
+      let $body = document.getElementsByTagName('body')[0]
+      let $input = document.createElement('input')
+      $input.setAttribute('type', 'file')
+      $input.setAttribute('accept', 'image/*')
+      this.multiple && $input.setAttribute('multiple', true)
+      $input.setAttribute('id', this.inputId)
+      $input.setAttribute('style', `
+        visibility: hidden;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        height: 0px;
+        width: 0px;
+      `)
+      $body.appendChild($input);
+      $input.addEventListener('change', event => {
+        this.pushFilesToImages(event.target.files)
+      }, false)
+    },
+    resetElementInput () {
+      let $body = document.getElementsByTagName('body')[0]
+      if (document.getElementById(this.inputId)) {
+        $body.removeChild(document.getElementById(this.inputId))
+      }
+      this.setElementInput()
+    },
+    eventListenerDrop () {
+      let drop = this.$refs[this.id]
+      drop.addEventListener('dragover', this.cancel, false)
+      drop.addEventListener('dragenter', this.cancel, false)
+
+      drop.addEventListener('drop', e => {
+        e = e || window.event; // get window.event if e argument missing (in IE)
+        this.cancel(e)
+        this.pushFilesToImages(e.dataTransfer.files)
+      }, false)
+    },
+    pushFilesToImages (files) {
+      for (let i = 0; i < files.length; i++) {
+        let file = files[i];
+        let reader = new FileReader()
+        reader.readAsDataURL(file)
+        reader.addEventListener('loadend', e => {
+          console.log(e.target.result)
+          this.images.push({
+            file: file,
+            url: e.target.result
+          })
+
+        }, false)
+      }
+    },
+    deleteImage (index) {
+      this.resetElementInput()
+      console.log(index)
+      console.log(this.images)
+      this.images.splice(index, 1)
     }
   }
 }
@@ -144,24 +151,5 @@ export default {
   }
   .image-reader-default {
 
-  }
-  /*.image-reader-input {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    opacity: 0;
-    z-index: 1;
-  }*/
-  #drop {
-    min-height: 150px;
-    width: 250px;
-    border: 1px solid blue;
-    margin: 10px;
-    padding: 10px;
   }
 </style>

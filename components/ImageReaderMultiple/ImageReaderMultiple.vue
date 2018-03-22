@@ -1,28 +1,22 @@
-<template>
-  <div
+<template lang="pug">
+  .image-reader(
     :id="id"
-    :style="{ width, 'min-height': minHeight }"
-    class="image-reader"
     :ref="id"
+    :style="{ width, 'min-height': minHeight }"
     v-sortable="{ onUpdate: onUpdate }"
     @click="onInput"
-  >
-    <slot
+  )
+    slot(
       name="default"
       v-if="isShow"
-    >
-      <span class="image-reader-default">Drop files here to upload</span>
-    </slot>
-
-    <div
+    )
+      span.image-reader-default Drop files here to upload
+    .image-reader-image(
       v-for="(image, index) in value"
-      class="imgae-reader-image"
-      @click.stop
-    >
-      <img :src="image.url" alt="">
-      <span @click.stop="deleteImage(index)">X</span>
-    </div>
-  </div>
+      @click.stop=""
+    )
+      img(:src="image.url")
+      span(@click.stop="deleteImage(index)") X
 </template>
 
 <script>
@@ -148,41 +142,36 @@ export default {
 }
 </script>
 
-<style scoped>
-  .image-reader {
-    position: relative;
-    border: 2px dashed #CBCBCB;
-    display: flex;
-    align-items: flex-start;
-    cursor: pointer;
-    flex-wrap: wrap;
-  }
-  .image-reader-default {
-    margin: auto;
-  }
-  .imgae-reader-image {
-    border: 3px solid #000;
-    margin: 15px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .imgae-reader-image img {
-    display: block;
-    max-height: 200px;
-    min-width: 100px;
-    object-fit: cover;
-  }
-  .imgae-reader-image span {
-    position: absolute;
-    top: -15px;
-    right: -15px;
-    background-color: gray;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    text-align: center;
-    line-height: 30px;
-  }
+<style lang="stylus" scoped>
+.image-reader
+  position: relative
+  border: 2px dashed #CBCBCB
+  display: flex
+  align-items: flex-start
+  cursor: pointer
+  flex-wrap: wrap
+.image-reader-default
+  margin: auto
+.image-reader-image
+  border: 3px solid #000
+  margin: 15px
+  position: relative
+  display: flex
+  align-items: center
+  justify-content: center
+  img
+    display: block
+    max-height: 200px
+    min-width: 100px
+    object-fit: cover
+  span
+    position: absolute
+    top: -15px
+    right: -15px
+    background-color: gray
+    border-radius: 50%
+    width: 30px
+    height: 30px
+    text-align: center
+    line-height: 30px
 </style>

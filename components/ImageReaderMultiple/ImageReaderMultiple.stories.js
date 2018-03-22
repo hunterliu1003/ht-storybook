@@ -20,19 +20,19 @@ storiesOf('ImageReaderMultiple', module)
       },
       watch: {
         images () {
-          console.log('images')
-          console.log(this.images)
+          // console.log('images')
+          // console.log(this.images)
         }
       },
       created () {
-        console.log(Sortable)
+        // console.log(Sortable)
       },
       methods: {
         log() {
           action('ImageReaderMultiple')();
         },
         onUpdate: function (event) {
-          console.log('onUpdate')
+          // console.log('onUpdate')
           this.list.splice(event.newIndex, 0, this.list.splice(event.oldIndex, 1)[0])
        }
       },

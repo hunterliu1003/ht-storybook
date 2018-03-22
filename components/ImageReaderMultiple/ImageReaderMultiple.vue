@@ -11,7 +11,7 @@
       name="default"
       v-if="isShow"
     >
-      <span>Drop files here to upload</span>
+      <span class="image-reader-default">Drop files here to upload</span>
     </slot>
 
     <div
@@ -156,6 +156,9 @@ export default {
     align-items: flex-start;
     cursor: pointer;
     flex-wrap: wrap;
+  }
+  .image-reader-default {
+    margin: auto;
   }
   .imgae-reader-image {
     border: 3px solid #000;

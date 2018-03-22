@@ -3,8 +3,9 @@
     :id="id"
     :style="{ width, 'min-height': minHeight }"
     class="image-reader"
-    @click="onInput"
     :ref="id"
+    v-sortable="{ onUpdate: onUpdate }"
+    @click="onInput"
   >
     <slot
       name="default"
@@ -74,6 +75,10 @@ export default {
     this.eventListenerDrop()
   },
   methods: {
+    onUpdate (event) {
+      console.log('onUpdate')
+      // this.value.splice(event.newIndex, 0, this.value.splice(event.oldIndex, 1)[0])
+    },
     onInput (event) {
       document.getElementById(this.inputId).click()
     },

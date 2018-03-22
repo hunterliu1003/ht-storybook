@@ -1,14 +1,11 @@
 import Vue from 'vue';
-
 import { storiesOf } from '@storybook/vue';
 import { action } from '@storybook/addon-actions';
 import centered from '@storybook/addon-centered';
 import { withReadme }  from 'storybook-readme';
 import README from './README.md';
 
-
 import ImageReaderMultiple from './';
-
 Vue.component('ImageReaderMultiple', ImageReaderMultiple);
 
 storiesOf('ImageReaderMultiple', module)
@@ -17,7 +14,8 @@ storiesOf('ImageReaderMultiple', module)
       data () {
         return {
           images: [],
-          images2: []
+          images2: [],
+          list: ['Foo', 'Bar', 'Baz']
         }
       },
       watch: {
@@ -26,10 +24,17 @@ storiesOf('ImageReaderMultiple', module)
           console.log(this.images)
         }
       },
+      created () {
+        console.log(Sortable)
+      },
       methods: {
         log() {
           action('ImageReaderMultiple')();
         },
+        onUpdate: function (event) {
+          console.log('onUpdate')
+          this.list.splice(event.newIndex, 0, this.list.splice(event.oldIndex, 1)[0])
+       }
       },
       template:`
         <div>
@@ -42,17 +47,7 @@ storiesOf('ImageReaderMultiple', module)
             v-model="images"
           >
           </ImageReaderMultiple>
-          <div>
-            imageReaderB
-          </div>
-          <ImageReaderMultiple
-            id="imageReaderB"
-            width="500px"
-            min-height="500px"
-            multiple
-            v-model="images2"
-          >
-          </ImageReaderMultiple>
+
         </div>
       `
     })));

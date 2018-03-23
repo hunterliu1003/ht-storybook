@@ -11,8 +11,10 @@
       v-if="isShow"
     )
       span.image-reader-default Drop files here to upload
+
     .image-reader-image(
       v-for="(image, index) in value"
+      :key="image.url"
       @click.stop=""
     )
       img(:src="image.url")
@@ -21,7 +23,6 @@
 
 <script>
 export default {
-  name: 'ImageReaderMultiple',
   props: {
     id: {
       type: String,
@@ -62,16 +63,13 @@ export default {
       return !(this.value.length > 0)
     }
   },
-  created () {
-  },
   mounted () {
     this.setElementInput()
     this.eventListenerDrop()
   },
   methods: {
     onUpdate (event) {
-      console.log('onUpdate')
-      // this.value.splice(event.newIndex, 0, this.value.splice(event.oldIndex, 1)[0])
+      this.value.splice(event.newIndex, 0, this.value.splice(event.oldIndex, 1)[0])
     },
     onInput (event) {
       document.getElementById(this.inputId).click()
@@ -122,20 +120,15 @@ export default {
     pushFilesToImages (files) {
       for (let i = 0; i < files.length; i++) {
         let file = files[i];
-        let reader = new FileReader()
-        reader.readAsDataURL(file)
-        reader.addEventListener('loadend', e => {
-          // console.log(e.target.result)
-          this.value.push({
-            file: file,
-            url: e.target.result
-          })
-
-        }, false)
+        this.value.push({
+          file: file,
+          url: URL.createObjectURL(file)
+        })
       }
     },
     deleteImage (index) {
       this.resetElementInput()
+      URL.revokeObjectURL(this.value[index].url)
       this.value.splice(index, 1)
     }
   }

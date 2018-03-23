@@ -15,13 +15,13 @@ storiesOf('ImageReaderMultiple', module)
         return {
           images: [],
           images2: [],
-          list: ['Foo', 'Bar', 'Baz']
+          // list: ['Foo', 'Bar', 'Baz']
         }
       },
       watch: {
         images () {
           // console.log('images')
-          // console.log(this.images)
+          console.log(this.images)
         }
       },
       created () {
@@ -33,7 +33,7 @@ storiesOf('ImageReaderMultiple', module)
         },
         onUpdate: function (event) {
           // console.log('onUpdate')
-          this.list.splice(event.newIndex, 0, this.list.splice(event.oldIndex, 1)[0])
+          // this.list.splice(event.newIndex, 0, this.list.splice(event.oldIndex, 1)[0])
        }
       },
       template:`
@@ -46,6 +46,7 @@ storiesOf('ImageReaderMultiple', module)
             multiple
             v-model="images"
           >
+
           </ImageReaderMultiple>
 
         </div>

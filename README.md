@@ -18,26 +18,21 @@
 
 ## install
 ``` bash
+# instal dependncies
 npm install
 ```
 
 ## development
 ```bash
+# serve with hot reload at localhost:9000
 npm run storybook
-# localhost:9000
 
+# template generator
 npm run plop
-# create new component
 ```
 
 ## production
 ```bash
+# build for production with minification
 npm run build:storybook
-# destination: ./.out
-```
-
-
-```bash
-npm run plop
-# create new component
 ```

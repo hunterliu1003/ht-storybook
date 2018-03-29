@@ -1,0 +1,15 @@
+{
+    "presets": [
+      ["env", {
+        "modules": false,
+        "loose": true,
+        "targets": {
+          "browsers": [
+            "> 5%",
+            "last 2 versions", 
+            "not ie <= 10"
+          ]
+        }
+      }]
+    ]
+  }

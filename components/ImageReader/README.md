@@ -1,1 +1,0 @@
-# ImageReader Markdown
